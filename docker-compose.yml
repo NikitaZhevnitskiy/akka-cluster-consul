@@ -45,7 +45,7 @@ services:
       - akka-cluster-demo2
       - akka-cluster-demo3
     ports:
-      - "80:80"
+      - "81:80"
       - "2551:2551"
     environment:
       - CONSUL_HOST=consul1
@@ -58,7 +58,7 @@ services:
       - consul1
       - akka-cluster-demo3
     ports:
-      - "81:80"
+      - "82:80"
       - "2552:2552"
     environment:
       - CONSUL_HOST=consul1
@@ -71,10 +71,16 @@ services:
     links:
       - consul1
     ports:
-      - "82:80"
+      - "83:80"
       - "2553:2553"
     environment:
       - CONSUL_HOST=consul1
       - SERVICE_AKKA_PORT=2553
       - SERVICE_PORT=2553
 
+  nginx:
+    build: ./nginx
+    image: zhenik/nginx-akka-example
+    ports:
+      - "8080:8080"
+      - "80:80"
